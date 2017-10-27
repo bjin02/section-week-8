@@ -25,24 +25,17 @@ def params_unique_combination(baseurl, params_d, private_keys=["api_key"]):
             res.append("{}-{}".format(k, params_d[k]))
     return baseurl + "_".join(res)
 
-def flickr_places_getInfoByUrl(url):
-    if not FLICKR_API_KEY:
-        raise Exception('Flickr API Key is missing!')
-    flickr_places_getInfoByUrl() = "https://api.flickr.com/"
-    
-def search_flickr_by_tags(tags):
+def flickr_photos_search():
     if not FLICKR_API_KEY:
         raise Exception('Flickr API Key is missing!')
 
     baseurl = "https://api.flickr.com/services/rest/"
     params_diction = {
-        "method": "flickr.photos.getInfo",
+        "method": "flickr.photos.search",
         "photo_id": "photo_id",
-        "format": "json",
         "api_key": FLICKR_API_KEY,
         "tags": tags,
         "per_page": 10,
-        "nojsoncallback": 1
     }
 
     unique_ident = params_unique_combination(baseurl,params_diction)
@@ -59,12 +52,12 @@ def search_flickr_by_tags(tags):
 
 class Photo:
     def __init__(self, photo_dict):
-        self.title = photo_dict['title']
+        self.title = photo_dict['title']['content']
         self.id = photo_dict['id']
-        self.owner = photo_dict['owner']
+        self.owner_username = photo_dict['owner']['username']
 
     def __str__(self):
-        return '{0} by {1}'.format(self.title, self.owner)
+        return '{0} by {1}'.format(self.title, self.owner_username)
 
 
 CACHE_DICTION = load_cache_json()
