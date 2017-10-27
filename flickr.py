@@ -25,8 +25,11 @@ def params_unique_combination(baseurl, params_d, private_keys=["api_key"]):
             res.append("{}-{}".format(k, params_d[k]))
     return baseurl + "_".join(res)
 
-def flickr_photoseets_getInfo()
-
+def flickr_places_getInfoByUrl(url):
+    if not FLICKR_API_KEY:
+        raise Exception('Flickr API Key is missing!')
+    flickr_places_getInfoByUrl() = "https://api.flickr.com/"
+    
 def search_flickr_by_tags(tags):
     if not FLICKR_API_KEY:
         raise Exception('Flickr API Key is missing!')
